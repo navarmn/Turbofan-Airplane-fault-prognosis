@@ -9,9 +9,10 @@ def load_data(type='train'):
         ----------
         type: str, default 'train'
             Type of set to be loaded: "train", "test" or "final_test"
-        """
+    """
     data = pd.read_csv(os.path.dirname(os.path.abspath(__file__)) + '/files/' 
                         + type + '.txt', sep=' ', header=None, )
     data.drop(axis=1, labels=[26,27], inplace=True)
     return data
     
+print(os.path.dirname(os.path.abspath(__file__)))
