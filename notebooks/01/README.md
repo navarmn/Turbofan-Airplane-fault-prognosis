@@ -46,11 +46,16 @@ Default settings of ```scikit-learn``` are used. No hyperparameters tunning was 
 
 **Table 01: Results from classifiers on dataset or regime 1.**
 
-| Classifier        | Acc (%)            | Cool  |
+| Classifier        | Acc (%) on train set           | Acc (%) on test set  |
 | ------------- |:-------------:| -----:|
-| col 3 is      |  $\pm$ | $1600 |
-| col 2 is      | centered      |   $12 |
-| zebra stripes | are neat      |    $1 |
+| KNN     						 	| 69.71 $\pm$ 0.34 | 55.18 $\pm$ 1.87 |
+| Random Forest						| 98.51 $\pm$ 0.13 | 58.01 $\pm$ 1.73 |
+| Gaussian Naive-Bayes				| 61.83 $\pm$ 0.23 | 61.55 $\pm$ 2.13 |
+| Gaussian Linear classifier        | 62.42 $\pm$ 0.20 | 62.35 $\pm$ 1.25 |
+| Gaussian Quadratic classifier     | 38.95 $\pm$ 9.71 | 39.39 $\pm$ 10.07 |
+| Perceptron					    | 45.61 $\pm$ 7.07 | 45.07 $\pm$ 6.98 |
+| SGD								| 56.83 $\pm$ 3.44 | 56.30 $\pm$ 3.74 | 
+
 
 ### Conclusions:
 
