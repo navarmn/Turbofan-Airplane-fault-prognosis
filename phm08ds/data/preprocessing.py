@@ -3,7 +3,29 @@ import pandas as pd
 from sklearn.base import BaseEstimator, TransformerMixin
 from sklearn.cluster import KMeans
 
-class Data_per_unit(TransformerMixin):
+""" 
+######################################################################################
+Global functions definitions: 
+######################################################################################
+"""
+
+def check_time_step(t, tmax):
+    if abs(t - tmax) >= 200:
+        return 1
+    elif abs(t - tmax) < 200 and abs(t - tmax) >= 150:
+        return 2
+    elif abs(t - tmax) < 150 and abs(t - tmax) > 50:
+        return 3
+    elif abs(t - tmax) <= 50:
+        return 4
+
+""" 
+######################################################################################
+Classes definitions: 
+######################################################################################
+"""
+
+class Data_per_unit(BaseEstimator, TransformerMixin):
     """ Recieves a pandas dataframe containg data and returns a dataframe with the data for the specified unit.
 
     Parameters
@@ -20,21 +42,21 @@ class Data_per_unit(TransformerMixin):
         """ Return the object with the unit to select from data """
         self.unit = unit
 
-    def fit_transform(self, X):
-        """ aueuhae """
-        return X[X[0] == self.unit]
+    def fit(self, X):
+        """ ... """
+        return self
 
     def transform(self, X):
         """ auheuhaeh """
-        return X[X[0] == self.unit]
+        return X[X['unit'] == self.unit]
 
-class Data_per_sensor(TransformerMixin):
+class Data_per_sensor(BaseEstimator, TransformerMixin):
     """ Recieves a pandas dataframe containg data and returns a dataframe with the data for the specified unit.
 
     Parameters
     ----------
     sensor: int, default 1
-        Sensor varies from 1 to 19.
+        Sensor varies from 1 to 20.
 
     """
 
@@ -42,13 +64,16 @@ class Data_per_sensor(TransformerMixin):
         """ Return the object with the unit to select from data """
         self.sensor = sensor
 
-    def fit_transform(self, X):
-        """ aueuhae """
-        return X[self.sensor + 5]
+    def fit (self, X):
+        """ ... """
+        return self
 
     def transform(self, X):
         """ auheuhaeh """
-        return X[self.sensor]
+        
+        return X[['unit', 'time_step',
+                  'operational_setting_1', 'operational_setting_2', 'operational_setting_3', 
+                   'Sensor_' + str(self.sensor)]]
 
 
 class OperationalCondition(BaseEstimator, TransformerMixin):
@@ -88,21 +113,60 @@ class OperationalCondition(BaseEstimator, TransformerMixin):
         """
         kmeans = KMeans(n_clusters=6)
         kmeans.cluster_centers_ = self.op_centers
-        operational_conditions = kmeans.predict(X.iloc[:,2:5])
-        # X.insert(26, 'operational_condition', operational_conditions)
-
+        operational_conditions = kmeans.predict(X.iloc[:,2:5]) + 1
+    
         return operational_conditions
 
 class Data_per_op_cond(BaseEstimator, TransformerMixin):
 
-    def __init__(self, X):
-        return self
-        
+    def __init__(self, operational_condition=1):
+        self.operational_condition = operational_condition
+
     def fit(self, X):
         return self
 
     def transform(self, X):
+        return X.loc[X['Operational_condition'] == self.operational_condition]
+
+class SensorReadings(BaseEstimator, TransformerMixin):
+
+    def fit(self, X):
         return self
+    def transform(self, X):
+        return X.drop(labels=['unit', 'time_step', 'operational_setting_1', 
+                        'operational_setting_2', 'operational_setting_3', 
+                        'Operational_condition'], axis=1)
+
+class HealthState(BaseEstimator, TransformerMixin):      
+
+    def __init__ (self, kind='Tamilselvan'):
+        self.kind = kind
+
+    def fit(self, X):
+        return self
+
+    def transform(self, X):
+        
+        t_max = X.groupby(['unit']).count()['time_step']
+        
+        health_states_unit = []
+        for (t_max_unit, df_unit) in zip(t_max, X.groupby(['unit'])):
+            buffer = df_unit[1]['time_step'].apply(check_time_step, tmax=t_max_unit)
+            health_states_unit.append(buffer.ravel())
+
+        health_states = []
+        for i in health_states_unit:
+            for j in i:
+                health_states.append(j)
+        
+        Y = X.copy()
+        Y['Health_state'] = health_states
+
+        return Y
+
+
+ 
+
 
 
         
