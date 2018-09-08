@@ -34,3 +34,15 @@ class RemoveInfo(BaseEstimator, TransformerMixin):
                         'operational_setting_2', 'operational_setting_3', 
                         'Operational_condition'], axis=1)
 
+class RemoveSensor(BaseEstimator, TransformerMixin):
+
+    def __init__ (self, sensors):
+        self.sensors = sensors
+
+    def fit(self, X):
+        return self
+
+    def transform(self, X):
+        sensor_headers = map(lambda x: 'Sensor_' + str(x), self.sensors)
+
+        return X.drop(labels=sensor_headers, axis=1)

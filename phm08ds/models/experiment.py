@@ -11,9 +11,6 @@ from sklearn.externals import joblib
 import os
 from itertools import cycle
 
-def hello(teste):
-    print('%s'%teste)
-
 #################################### Run classifiers: ##########################
 def run_classifiers(X, y, classifiers, cv):
    
@@ -206,7 +203,7 @@ def export_results(results, foldername):
 def ROC_curves(results, foldername):
     foldertree = 'Results'
     # local defs:
-    plt.style.use('../utils/seaborn-poster__navar.mplstyle')
+    # plt.style.use('../utils/seaborn-poster__navar.mplstyle')
     #colors = cycle(['aqua', 'darkorange', 'cornflowerblue', 'deeppink', 'navy'])
     lw = 5
     
