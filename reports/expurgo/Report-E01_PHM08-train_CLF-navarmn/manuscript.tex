@@ -1,0 +1,265 @@
+\documentclass[review]{elsarticle}
+%\documentclass[5p,times]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage[figuresright]{rotating}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{float}
+
+\usepackage[utf8]{inputenc} 
+\usepackage{graphicx}
+%\usepackage{subfigure}
+\usepackage{amsfonts}
+\usepackage[normalem]{ulem}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{etex}
+\usepackage[section]{placeins}
+\usepackage{here}
+\usepackage{adjustbox}
+%\usepackage[authoryear]{natbib}
+\usepackage{subfig}
+%\usepackage{subfigure}
+%\usepackage{longtable}
+\usepackage{amsfonts}
+%\usepackage[numbers]{natbib}
+\usepackage[normalem]{ulem}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+%\usepackage{xcolor}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb}
+%\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{etex}
+\usepackage[section]{placeins}
+\usepackage{graphicx,color}
+%\usepackage{cite}
+\usepackage{placeins}
+
+\usepackage{hyperref}
+\usepackage{siunitx}
+
+\usepackage{tikz}
+
+\definecolor{verde}{rgb}{0.6, 0.84, 0.78}
+
+
+
+\modulolinenumbers[5]
+
+\journal{Journal of \LaTeX\ Templates}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\title{Report on E01 PHM08-train CLF-navarmn}
+
+\maketitle
+
+
+\begin{table}[!htb]
+\caption{Results from average metrics of overall classes: Accuracy (Acc), Sensitivity (Sen),  Specificity (Spc), F-score (Fsc) obtained from a extractors Fourier, HOS and SCM, combined with classifiers MLP, SVM and Bayes.}
+\centering
+
+%\resizebox{230pt}{!}{
+\begin{tabular}{lcc|c}
+\toprule
+\multirow{2}{*}{Classifier}    & \multirow{2}{*}{Acc - Train (\%)}   & \multirow{2}{*}{Acc (\%) - Test} & \cite{tamilselvan2013failure} - DBN \\ 
+                      \\ \hline \hline 
+KNN      & 69.71$\pm$0.34 & 55.18$\pm$1.87 \\  
+Random Fores        & 98.51$\pm$1.06 & 58.01$\pm$1.72 \\
+Gaussian Naive-Bayes         & 61.87$\pm$0.23 & 61.55$\pm$2.13 \\
+Gaussian Linear discriminant & 62.42$\pm$1.06 & 62.35$\pm$1.25 \\
+Gaussian Quadratic discriminant & 38.95$\pm$9.71 & 39.39$\pm$10.07 \\
+Perceptron - LMS & 45.61$\pm$7.07 & 45.07$\pm$6.98 \\
+Perceptron - SGD & 56.83$\pm$3.44 & 56.30$\pm$3.73 \\
+MLP & 63.18$\pm$0.29  & 62.70$\pm$1.45 \\
+SVM-RBF &  &  \\
+\hline \hline
+
+\bottomrule
+\end{tabular}
+\label{tab:clf_all}
+\end{table}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{table}[!htb]
+\caption{Results from average metrics of overall classes: Accuracy (Acc), Sensitivity (Sen),  Specificity (Spc), F-score (Fsc) obtained from a extractors Fourier, HOS and SCM, combined with classifiers MLP, SVM and Bayes.}
+\centering
+
+%\resizebox{230pt}{!}{
+\begin{tabular}{lcccc}
+\toprule
+\multirow{2}{*}{Classifier}    & \multirow{2}{*}{Acc (\%)}   & \multirow{2}{*}{Sen (\%)}  & \multirow{2}{*}{Spc (\%)}  & \multirow{2}{*}{Fsc (\%)}         \\ 
+                      \\ \hline \hline 
+
+\multicolumn{5}{c}{\textbf{Fourier}}                                                                                  \\ \hline
+MLP      & \textbf{84.48$\pm$2.65} & 84.48$\pm$2.65 & 97.01$\pm$0.59 & 84.48$\pm$2.65 \\  
+SVM        & 83.94$\pm$1.06 & 51.31$\pm$3.58 & 91.42$\pm$0.59  & 55.04$\pm$2.57\\
+Bayes        & 77.30$\pm$0.63 & 77.47$\pm$1.13 & 95.33$\pm$0.16  & 77.39$\pm$0.81 \\
+\hline \hline
+
+\multicolumn{5}{c}{\textbf{HOS}}                                                                                  \\ \hline           
+MLP      & 83.54$\pm$1.42 & 83.54$\pm$2.31 & 96.82$\pm$0.34 & 83.54$\pm$1.57 \\  
+SVM        & \textbf{89.60$\pm$0.52} & 76.79$\pm$1.35  & 95.43$\pm$0.34  & 77.08$\pm$1.24\\
+Bayes        & 78.96$\pm$0.64 & 78.96$\pm$0.64  & 95.75$\pm$0.16  & 78.96$\pm$0.64\\
+\hline \hline
+
+
+\multicolumn{5}{c}{\textbf{SCM}}                                                                                  \\ \hline
+MLP      & 40.93$\pm$5.58 & 40.93$\pm$7.97  & 80.61$\pm$3.56  & 40.93$\pm$4.75 \\  
+SVM        & \textbf{89.14$\pm$0.74} & 64.53$\pm$2.52  & 93.13$\pm$0.53  & 62.87$\pm$3.32 \\
+Bayes        & 54.97$\pm$1.00 & 55.03$\pm$1.05  & 88.00$\pm$0.41  & 55.03$\pm$1.00 \\
+\hline \hline
+
+\bottomrule
+\end{tabular}
+\label{tab:clf_all}
+\end{table}
+
+\begin{table}[!htb]
+\caption{Results of an average accuracy rate comparison between different generator operational states (Classes), over the features extraction methods Fourier, HOS, and SCM.}
+%\resizebox{230pt}{!}{
+\centering
+
+\begin{tabular}{c|ccc}
+
+\toprule
+%\multirow{2}{*}{Class}           & \multirow{2}{*}{Acc (\%)}  & \multirow{2}{*}{Spe (\%)} & \multirow{2}{*}{Sen (\%)} & \multirow{2}{*}{Fsc (\%)} \\ \\ 
+%\hline \hline 
+%         
+\hline
+\multirow{2}{*}{Class} & \multicolumn{3}{c}{\textbf{Fourier}} \\ 
+\cline{2-4}
+                       & \textbf{MLP} & SVM & Bayes 
+                            \\ \hline           
+Normal     & \textbf{99.98$\pm$0.11}   & 80.87$\pm$2.27    & 99.14$\pm$0.33 \\  
+HI-1       & 73.51$\pm$12.26  & 76.34$\pm$1.82    & 62.94$\pm$3.27 \\
+HI-2       & 66.00$\pm$8.74   & 80.26$\pm$0.75    & 54.11$\pm$3.28 \\
+HI-3       & 94.05$\pm$3.82   & 81.18$\pm$1.88    & 86.71$\pm$1.31 \\ 
+LI-1       & 58.94$\pm$12.36  & 83.36$\pm$2.99    & 39.49$\pm$5.91 \\ 
+LI-2       & 98.89$\pm$1.12   & 87.66$\pm$1.29    & 92.10$\pm$1.21 \\ 
+LI-3       & 100.00$\pm$0.00  & 97.96$\pm$0.17    & 100.00$\pm$0.00 \\
+\hline
+\hline
+%
+\multirow{2}{*}{Class} & \multicolumn{3}{c}{\textbf{HOS}} \\ 
+\cline{2-4}
+                       & MLP & SVM & Bayes 
+                            \\ \hline           
+Normal     & 63.93$\pm$1.24   & 81.17$\pm$3.30    & 59.24$\pm$4.49  \\  
+HI-1       & 74.03$\pm$2.60   & 72.04$\pm$0.93    & 47.46$\pm$5.40  \\
+HI-2       & 98.11$\pm$1.39   & 78.10$\pm$0.90    & 96.24$\pm$0.77  \\
+HI-3       & 98.25$\pm$1.22   & 88.71$\pm$0.27    & 99.22$\pm$0.52  \\ 
+LI-1       & 80.39$\pm$1.71   & 84.16$\pm$1.03    & 63.23$\pm$2.54  \\ 
+LI-2       & 98.78$\pm$0.55   & 98.20$\pm$0.47    & 100.00$\pm$0.00  \\ 
+LI-3       & 96.88$\pm$0.33   & 99.20$\pm$0.53    & 97.37$\pm$0.67  \\
+\hline
+\hline
+%
+\multirow{2}{*}{Class} & \multicolumn{3}{c}{\textbf{SCM}} \\ 
+\cline{2-4}
+                       & MLP & SVM & Bayes 
+                            \\ \hline           
+Normal     & 51.59$\pm$0.57   & 77.66$\pm$2.12    & 49.03$\pm$3.97  \\  
+HI-1       & 31.75$\pm$1.70   & 81.31$\pm$1.92    & 73.51$\pm$3.68  \\
+HI-2       & 50.00$\pm$0.80   & 92.63$\pm$1.55    & 10.38$\pm$.29  \\
+HI-3       & 46.03$\pm$1.09   & 97.30$\pm$0.63    & 50.12$\pm$2.10  \\ 
+LI-1       & 69.84$\pm$2.01   & 83.14$\pm$2.68    & 17.03$\pm$7.14  \\ 
+LI-2       & 64.29$\pm$0.95   & 97.66$\pm$0.96    & 90.35$\pm$1.20  \\ 
+LI-3       & 90.48$\pm$0.44   & 99.34$\pm$0.35    & 92.87$\pm$1.06  \\
+%\hline \hline
+%
+\hline
+\bottomrule
+\end{tabular}
+%}
+ \label{tab:Class_ind}
+\end{table} 
+
+
+\begin{table}[!htb]
+\centering
+\caption{Percentage average confusion matrix for \textbf{Fourier-MLP}. The highlights correspond to correct classifications and are also the accuracy rate of each class, while the other number are the misclassifications rates. The sum in each row correspond to 100\%.}
+\resizebox{1\linewidth}{!}{
+\begin{tabular}{c|ccccccc}
+\toprule
+%\multirow{2}{*}{Class}           & \multirow{2}{*}{Acc (\%)}  & \multirow{2}{*}{Spe (\%)} & \multirow{2}{*}{Sen (\%)} & \multirow{2}{*}{Fsc (\%)} \\ \\ 
+%\hline \hline 
+%         
+\hline
+\multirow{2}{*}{Labels} & \multicolumn{7}{c}{Predictions} \\ 
+\cline{2-8}
+                       & Normal & HI-1 & HI-2 & HI-3 & LI-1 & LI-2 & LI-3  
+                            \\ \hline            
+Normal & \textbf{99.98\%} & 0.00\%  & 0.01\%  & 0.00\%   & 0.00\%  & 0.00\%   & 0.00\%   \\
+HI-1   & 0.93\%   & \textbf{73.50\%} & 4.41\%  & 0.49\%   & 19.25\% & 0.85\%   & 0.53\%   \\
+HI-2   & 1.84\%   & 7.44\%  & \textbf{66\%} & 6.38\%   & 14.12\% & 3.25\%   & 0.95\%   \\
+HI-3   & 0.12\%   & 0.82\%  & 3.26\%  & \textbf{94.04\%}  & 1.00\%  & 0.68\%   & 0.04\%   \\
+LI-1   & 1.09\%   & 28.11\% & 8.84\% & 1.26\%   & \textbf{58.93\%} & 1.04\%   & 0.69\%   \\
+LI-2   & 0.02\%   & 0.05\%  & 0.25\%  & 0.49\%   & 0.14\% & \textbf{98.88\%} & 0.15\%   \\
+LI-3   & 0.00\%   & 0.00\%  & 0.00\%  & 0.00\%   & 0.00\%  & 0.00\%   & \textbf{100\%}  \\
+\hline
+\bottomrule
+\end{tabular}
+}
+\label{tab:tabela_de_confusao}
+\end{table}
+
+
+
+\bibliography{mybibfile}
+
+\end{document}
+
+
+

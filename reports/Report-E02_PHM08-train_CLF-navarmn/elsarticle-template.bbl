@@ -1,0 +1,57 @@
+\begin{thebibliography}{5}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\href}[2]{#2}
+\providecommand{\path}[1]{#1}
+\providecommand{\DOIprefix}{doi:}
+\providecommand{\ArXivprefix}{arXiv:}
+\providecommand{\URLprefix}{URL: }
+\providecommand{\Pubmedprefix}{pmid:}
+\providecommand{\doi}[1]{\href{http://dx.doi.org/#1}{\path{#1}}}
+\providecommand{\Pubmed}[1]{\href{pmid:#1}{\path{#1}}}
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\undefined \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Inproceedings
+\bibitem[{Ramasso(2009)}]{ramasso2009contribution}
+\bibinfo{author}{Ramasso\xfnm[ E.]}.
+\newblock \bibinfo{title}{Contribution of belief functions to hidden markov
+  models with an application to fault diagnosis}.
+\newblock In: \bibinfo{booktitle}{Machine Learning for Signal Processing, 2009.
+  MLSP 2009. IEEE International Workshop on}. \bibinfo{organization}{IEEE};
+  \bibinfo{year}{2009}. p. \bibinfo{pages}{1--6}.
+%Type = Inproceedings
+\bibitem[{Ramasso and Gouriveau(2010)}]{ramasso2010prognostics}
+\bibinfo{author}{Ramasso\xfnm[ E.]}, \bibinfo{author}{Gouriveau\xfnm[ R.]}.
+\newblock \bibinfo{title}{Prognostics in switching systems: Evidential
+  markovian classification of real-time neuro-fuzzy predictions}.
+\newblock In: \bibinfo{booktitle}{Prognostics and Health Management Conference,
+  2010. PHM'10.} \bibinfo{organization}{IEEE}; \bibinfo{year}{2010}. p.
+  \bibinfo{pages}{1--10}.
+%Type = Article
+\bibitem[{Tamilselvan and Wang(2013)}]{tamilselvan2013failure}
+\bibinfo{author}{Tamilselvan\xfnm[ P.]}, \bibinfo{author}{Wang\xfnm[ P.]}.
+\newblock \bibinfo{title}{Failure diagnosis using deep belief learning based
+  health state classification}.
+\newblock \bibinfo{journal}{Reliability Engineering \& System Safety}
+  \bibinfo{year}{2013};\bibinfo{volume}{115}:\bibinfo{pages}{124--135}.
+%Type = Inproceedings
+\bibitem[{Wang et~al.(2008)Wang, Yu, Siegel and Lee}]{wang2008similarity}
+\bibinfo{author}{Wang\xfnm[ T.]}, \bibinfo{author}{Yu\xfnm[ J.]},
+  \bibinfo{author}{Siegel\xfnm[ D.]}, \bibinfo{author}{Lee\xfnm[ J.]}.
+\newblock \bibinfo{title}{A similarity-based prognostics approach for remaining
+  useful life estimation of engineered systems}.
+\newblock In: \bibinfo{booktitle}{Prognostics and Health Management, 2008. PHM
+  2008. International Conference on}. \bibinfo{organization}{IEEE};
+  \bibinfo{year}{2008}. p. \bibinfo{pages}{1--6}.
+%Type = Inproceedings
+\bibitem[{Zhao et~al.(2011)Zhao, Georgescu and Willett}]{zhao2011comparison}
+\bibinfo{author}{Zhao\xfnm[ D.]}, \bibinfo{author}{Georgescu\xfnm[ R.]},
+  \bibinfo{author}{Willett\xfnm[ P.]}.
+\newblock \bibinfo{title}{Comparison of data reduction techniques based on svm
+  classifier and svr performance}.
+\newblock In: \bibinfo{booktitle}{Signal and Data Processing of Small Targets
+  2011}. \bibinfo{organization}{International Society for Optics and
+  Photonics}; volume \bibinfo{volume}{8137}; \bibinfo{year}{2011}. p.
+  \bibinfo{pages}{81370X}.
+
+\end{thebibliography}

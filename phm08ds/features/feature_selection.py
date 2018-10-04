@@ -4,11 +4,13 @@ from sklearn.base import BaseEstimator, TransformerMixin
 
 class SelectSensors(BaseEstimator, TransformerMixin):
 
-    def __init__(self, kind='Wang2008'):
+    def __init__(self, kind='Wang2008', sensors=[]):
         self.kind = kind
         if type(self.kind) is str:
             if self.kind == 'Wang2008':
                 self.sensors = [2,3,4,7,11,12,15]
+            if self.kind == 'custom':
+                self.sensors = sensors
         elif all(type(n) is int for n in self.kind):
             self.sensors = self.kind
 
@@ -18,8 +20,9 @@ class SelectSensors(BaseEstimator, TransformerMixin):
     def transform(self, X):            
         sensor_headers = map(lambda x: 'Sensor_' + str(x), self.sensors)
 
-        general_info = ['unit', 'time_step', 'operational_setting_1', 'operational_setting_2', 'operational_setting_3']
-        important_info = ['Operational_condition', 'Health_state']
+        general_info = ['unit', 'time_step', 'operational_setting_1', 
+                        'operational_setting_2', 'operational_setting_3']
+        important_info = ['Operational_condition']
 
         return X.get(general_info + list(sensor_headers) + important_info)
 

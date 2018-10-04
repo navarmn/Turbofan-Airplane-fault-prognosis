@@ -171,13 +171,13 @@ def metrics_confMat(confMat):
 #################################### Save models: ##########################
 
 
-def save_models(classifiers):
+def save_models(classifiers, name='classifiers'):
     foldertree = 'Results'
     foldername = 'models'
     
     check_folder(foldertree, foldername)
         
-    joblib.dump(classifiers, os.path.join(foldertree, foldername, 'classifiers.pkl')) 
+    joblib.dump(classifiers, os.path.join(foldertree, foldername, name + '.pkl')) 
     
 def save_pipeline(pipeline):
     foldertree = 'Results'

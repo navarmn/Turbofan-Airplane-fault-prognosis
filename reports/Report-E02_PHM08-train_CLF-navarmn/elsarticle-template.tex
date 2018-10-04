@@ -1,0 +1,285 @@
+\documentclass[review]{elsarticle}
+%\documentclass[5p,times]{elsarticle}
+
+\usepackage{lineno,hyperref}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{adjustbox}
+\usepackage[figuresright]{rotating}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{float}
+
+\usepackage[utf8]{inputenc}	
+\usepackage{graphicx}
+%\usepackage{subfigure}
+\usepackage{amsfonts}
+\usepackage[normalem]{ulem}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{caption}
+\usepackage{etex}
+\usepackage[section]{placeins}
+\usepackage{here}
+\usepackage{adjustbox}
+%\usepackage[authoryear]{natbib}
+\usepackage{subfig}
+%\usepackage{subfigure}
+%\usepackage{longtable}
+\usepackage{amsfonts}
+%\usepackage[numbers]{natbib}
+\usepackage[normalem]{ulem}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+%\usepackage{xcolor}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{amsmath,amssymb}
+%\usepackage{subcaption}
+\usepackage{caption}
+\usepackage{etex}
+\usepackage[section]{placeins}
+\usepackage{graphicx,color}
+%\usepackage{cite}
+\usepackage{placeins}
+
+\usepackage{hyperref}
+\usepackage{siunitx}
+
+\usepackage{tikz}
+
+\definecolor{verde}{rgb}{0.6, 0.84, 0.78}
+
+
+
+\modulolinenumbers[5]
+
+\journal{Journal of \LaTeX\ Templates}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+%% Elsevier bibliography styles
+%%%%%%%%%%%%%%%%%%%%%%%
+%% To change the style, put a % in front of the second line of the current style and
+%% remove the % from the second line of the style you would like to use.
+%%%%%%%%%%%%%%%%%%%%%%%
+
+%% Numbered
+%\bibliographystyle{model1-num-names}
+
+%% Numbered without titles
+%\bibliographystyle{model1a-num-names}
+
+%% Harvard
+%\bibliographystyle{model2-names.bst}\biboptions{authoryear}
+
+%% Vancouver numbered
+%\usepackage{numcompress}\bibliographystyle{model3-num-names}
+
+%% Vancouver name/year
+\usepackage{numcompress}\bibliographystyle{model4-names}\biboptions{authoryear}
+
+%% APA style
+%\bibliographystyle{model5-names}\biboptions{authoryear}
+
+%% AMA style
+%\usepackage{numcompress}\bibliographystyle{model6-num-names}
+
+%% `Elsevier LaTeX' style
+\bibliographystyle{elsarticle-num}
+%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+Experimento realizado com diversos classificadores. A Clusterização do sinal foi feita utilizando \emph{Kmeans}, de acordo com o proposto por \cite{wang2008similarity}. Para os teste iniciais, a escolha dos sensores também foi a mesma proposta por \cite{wang2008similarity}. 
+
+A segmentação do sinal, para definição das classes foi utilizada a mesma proposta por \cite{tamilselvan2013failure}, que consite em: as 50 últimas amostras no sinal correspondem ao estado de falha (HS-4), as amostras entre 51 e 125, distas da falha são o estado de degradação eminente (HS-3). As amostras entre 126 e 200 são consideras estados de transição (HS-2), na qual há pouca diferença entre a condição normal e de falha eminente. A partir da amostras 201, é considera região normal, de regime permanente (HS-1).
+
+Para rodar os experimentos, todos os classificadores foram submetidos a mesma divisão do conjunto de dados, usando \emph{10-fold cross validation}. Os resultas são no conjunto sugerido para treinamento e parametrização, o \emph{$FD005-train$}. Não foram usados os conjuntos de teste ou validação disponibilizados.
+
+Os hiperâmetros selecionados para os classificadores foram:
+\begin{itemize}
+	\item \textbf{KNN}: Distância: euclidiana; Vizinhos: 5;
+	\item \textbf{Random Forest}: Número de estimadores: 10; Número máximo de profundidade: N/A; Número máximo de ramificações: N/A; Meta-algorithm: \emph{bagging};
+	\item \textbf{Perceptron - LMS}: $\eta=1$; Número de épocas: 1000; Tolerancia do erro: $10^{-4}$;
+	\item \textbf{Perceptron - SGD}: $\eta_0=0.005$; Número de épocas: 1000; Tolerancia do erro: $10^{-4}$; Regularização: $L_2$; $\alpha:0.0001$;
+	\item \textbf{MLP}: Função de ativação: $tanh$; $\eta_0=0.001$; Tolerancia do erro: $10^{-5}$; Algoritmo de treinamento: testes com ADAM e L-BFGS; Foi utilizado \emph{random search} para definição do número de neurônios entre 2 e 1000;
+\end{itemize}
+
+
+\begin{table}[H]
+\caption{Results from all classifiers, on the subset of data from Operationa Condition 1. Features are the sensors reading just as reported by \cite{wang2008similarity}}
+\centering
+
+%\resizebox{230pt}{!}{
+\begin{tabular}{lcc}
+\toprule
+\hline
+Classifier   & Acc - Train (\%)  & Acc (\%) - Test\\ 
+                      \\ \hline \hline 
+KNN      			& 69.71$\pm$0.34 & 55.18$\pm$1.87 \\  
+Random Forest        & 98.51$\pm$1.06 & 58.01$\pm$1.72 \\
+Gaussian Naive-Bayes         & 61.87$\pm$0.23 & 61.55$\pm$2.13 \\
+Gaussian Linear discriminant & 62.42$\pm$1.06 & 62.35$\pm$1.25 \\
+Gaussian Quadratic discriminant & 38.95$\pm$9.71 & 39.39$\pm$10.07 \\
+Perceptron - LMS & 45.61$\pm$7.07 & 45.07$\pm$6.98 \\
+Perceptron - SGD & 56.83$\pm$3.44 & 56.30$\pm$3.73 \\
+MLP & 63.18$\pm$0.29  & 62.70$\pm$1.45 \\
+\hline
+\hline
+\multicolumn{3}{c}{Reports on literature} \\
+\hline
+\hline
+\cite{ramasso2009contribution} - HMM - \textbf{Nota 1}& -  & 69.25\\
+\cite{ramasso2010prognostics} - HMM + Fuzzy - \textbf{Nota 2} & -  & 66.25\\
+\cite{zhao2011comparison} - SVM - \textbf{Nota 3} & -  & 90\\
+\cite{tamilselvan2013failure} - DBN & -  & 90.72 \\
+\hline \hline
+
+\bottomrule
+\end{tabular}
+\label{tab:clf_all}
+\end{table}
+
+\textbf{Nota 1}: Utiliza uma versão mais simplista do conjunto de dado com uma condição operacional e dois tipos de falha.
+
+\textbf{Nota 2}: O Autor não explica com clareza como chegou ao pontos para segmentação do sinal. Entretanto em um de seus trabalhos anteriores (\cite{ramasso2009contribution}), o autor utilizou Gaussian Mixture Models (GMM) para segmentar os sinais. Supôs-se que a segmentação utilizada foi a mesma.
+
+\textbf{Nota 3}: O Autor não explica quais condições operacionais utilizou. Foram utilizados limites para definições das classes diferente de \cite{tamilselvan2013failure}. O artigo é pobre ao explicar detalhes de preprocessamento dos dados. O autor não reporta quais sensores utilizou como atributos.
+
+
+\begin{table}[!htb]
+\caption{Results from all classifiers, on the subset of data from Operationa Condition 2. Features are the sensors reading just as reported by \cite{wang2008similarity}}
+\centering
+
+%\resizebox{230pt}{!}{
+\begin{tabular}{lcc}
+\toprule
+\hline
+Classifier   & Acc - Train (\%)  & Acc (\%) - Test\\ 
+                      \\ \hline \hline 
+KNN      			& 69.10$\pm$0.54 & 55.10$\pm$0.99 \\  
+Random Forest        & 98.42$\pm$2.03 & 56.34$\pm$1.36 \\
+Gaussian Naive-Bayes         & 60.15$\pm$0.23 & 56.74$\pm$2.12 \\
+Gaussian Linear discriminant & 63.15$\pm$1.06 & 62.93$\pm$1.36 \\
+Gaussian Quadratic discriminant & 35.54$\pm$7.71 & 29.46$\pm$10.59 \\
+Perceptron - LMS & 54.74$\pm$3.04 & 54.95$\pm$6.79 \\
+Perceptron - SGD & 53.83$\pm$3.12 & 54.76$\pm$6.30 \\
+MLP & 62.90$\pm$0.27  & 62.06$\pm$0.12	 \\
+\hline
+\hline
+\multicolumn{3}{c}{Reports on literature} \\
+\hline
+\hline
+\cite{ramasso2009contribution} - HMM - \textbf{Nota 1}& -  & 69.25\\
+\cite{ramasso2010prognostics} - HMM + Fuzzy - \textbf{Nota 2} & -  & 66.25\\
+\cite{zhao2011comparison} - SVM - \textbf{Nota 3} & -  & 90\\
+\cite{tamilselvan2013failure} - DBN & -  & 95.80 \\
+\hline \hline
+
+\bottomrule
+\end{tabular}
+\label{tab:clf_all}
+\end{table}
+
+
+\begin{table}[!htb]
+\centering
+\caption{Matriz de confusão da MLP para o conjunto formado pelo regime 1 e pelos sensores sugeridos por \cite{wang2008similarity}.}
+\begin{tabular}{c|cccc}
+\toprule
+%\multirow{2}{*}{Class}           & \multirow{2}{*}{Acc (\%)}  & \multirow{2}{*}{Spe (\%)} & \multirow{2}{*}{Sen (\%)} & \multirow{2}{*}{Fsc (\%)} \\ \\ 
+%\hline \hline 
+%         
+\hline
+\multirow{2}{*}{Labels} & \multicolumn{3}{c}{Predictions} \\ 
+\cline{2-5}
+                 & HS-1 & HS-2 & HS-3 & HS-4 \\ \hline            
+HS-1 & \textbf{1.6\% } & 24.06\% & 74.06\% & 0.27\%   \\
+HS-2 & 0.92\% & \textbf{18.55\%} & 79.95\% & 0.58\%   \\
+HS-3 & 0.53\% & 5.71\%  & \textbf{86.21\%} & 7.55\%   \\
+HS-4 & 0.0\%  & 0.0\%   & 23.62\% & \textbf{76.38\%}  \\
+\hline
+\bottomrule
+\end{tabular}
+\label{tab:tabela_de_confusao}
+\end{table}
+
+
+\subsection{Using different sensors} % (fold)
+\label{sec:teste_com_diferentes_sensores}
+\begin{table}[H]
+\caption{Results from all classifiers on the test subset of data from Operationa Condition 1. Features are the readins from sensors [1,2,3,6,8,10,11,12,13,14,19,20]}
+\centering
+
+%\resizebox{230pt}{!}{
+\begin{tabular}{lcc}
+\toprule
+\hline
+Classifier   & Acc after (\%)  & Acc before (\%)\\ 
+                      \\ \hline \hline 
+KNN      			& 57.90$\pm$0.27 & 55.10$\pm$0.99 \\  
+Random Forest        & 60.51$\pm$2.03 & 56.34$\pm$1.36 \\
+Gaussian Naive-Bayes         & 58.28$\pm$3.23 & 56.74$\pm$2.12 \\
+Gaussian Linear discriminant & 63.61$\pm$1.33 & 62.93$\pm$1.36 \\
+Gaussian Quadratic discriminant & 61.39$\pm$2.23 & 29.46$\pm$10.59 \\
+Perceptron - LMS & 56.40$\pm$6.25 & 54.95$\pm$6.79 \\
+Perceptron - SGD & 56.48$\pm$2.81 & 54.76$\pm$6.30 \\
+MLP & 63.70$\pm$0.20  & 62.06$\pm$0.12	 \\
+\hline
+\hline
+\multicolumn{3}{c}{Reports on literature} \\
+\hline
+\hline
+\cite{ramasso2009contribution} - HMM - \textbf{Nota 1}& -  & 69.25\\
+\cite{ramasso2010prognostics} - HMM + Fuzzy - \textbf{Nota 2} & -  & 66.25\\
+\cite{zhao2011comparison} - SVM - \textbf{Nota 3} & -  & 90\\
+\cite{tamilselvan2013failure} - DBN & -  & 95.80 \\
+\hline \hline
+
+\bottomrule
+\end{tabular}
+\label{tab:clf_all}
+\end{table}
+
+\begin{table}[!htb]
+\centering
+\caption{Matriz de confusão da MLP para o conjunto formado pelo regime 1 e pelos sensores [1,2,3,6,8,10,11,12,13,14,19,20]}
+\begin{tabular}{c|cccc}
+\toprule
+%\multirow{2}{*}{Class}           & \multirow{2}{*}{Acc (\%)}  & \multirow{2}{*}{Spe (\%)} & \multirow{2}{*}{Sen (\%)} & \multirow{2}{*}{Fsc (\%)} \\ \\ 
+%\hline \hline 
+%         
+\hline
+\multirow{2}{*}{Labels} & \multicolumn{3}{c}{Predictions} \\ 
+\cline{2-5}
+                 & HS-1 & HS-2 & HS-3 & HS-4 \\ \hline            
+HS-1 & \textbf{3.16\% } & 38.05\% & 58.79\% & 0\%   \\
+HS-2 & 3.84\% & \textbf{26.37\%} & 69.79\% & 0\%   \\
+HS-3 & 0.74\% & 9.88\%  & \textbf{83.55\%} & 5.82\%   \\
+HS-4 & 0.0\%  & 0.0\%   & 18.07\% & \textbf{81.93\%}  \\
+\hline
+\bottomrule
+\end{tabular}
+\label{tab:tabela_de_confusao}
+\end{table}
+
+
+
+
+% section teste_com_diferentes_sensores (end)
+
+
+\section*{References}
+
+\bibliography{phm08}
+
+\end{document}

@@ -88,12 +88,19 @@ class OperationalCondition(BaseEstimator, TransformerMixin):
     def __init__(self):
         """ Return the object with the unit to select from data """
         self.sensors = 26
-        self.op_centers = np.array([[ 3.50030533e+01,  8.40489284e-01,  6.00000000e+01],
-                                    [ 1.00029627e+01,  2.50502528e-01,  2.00000000e+01],
-                                    [ 1.51675295e-03,  4.97670406e-04,  1.00000000e+02],
-                                    [ 4.20030440e+01,  8.40510423e-01,  4.00000000e+01],
-                                    [ 2.50030126e+01,  6.20516407e-01,  8.00000000e+01],
-                                    [ 2.00029465e+01,  7.00497164e-01, -7.13384907e-12]])
+        # self.op_centers = np.array([[ 3.50030533e+01,  8.40489284e-01,  6.00000000e+01],
+        #                             [ 1.00029627e+01,  2.50502528e-01,  2.00000000e+01],
+        #                             [ 1.51675295e-03,  4.97670406e-04,  1.00000000e+02],
+        #                             [ 4.20030440e+01,  8.40510423e-01,  4.00000000e+01],
+        #                             [ 2.50030126e+01,  6.20516407e-01,  8.00000000e+01],
+        #                             [ 2.00029465e+01,  7.00497164e-01, -7.13384907e-12]])
+
+        self.op_centers = np.array([[10.01, 0.2511, 20],
+                                    [20, 0.702, 0],
+                                    [0.0024, 0.001, 100],
+                                    [42, 0.84, 40],
+                                    [20, 0.702, 0],
+                                    [25, 0.621, 80]])
 
     def fit(self, X, y=None):
         return self
@@ -113,7 +120,13 @@ class OperationalCondition(BaseEstimator, TransformerMixin):
         """
         kmeans = KMeans(n_clusters=6)
         kmeans.cluster_centers_ = self.op_centers
-        operational_conditions = kmeans.predict(X.iloc[:,2:5]) + 1
+
+        operational_readings = np.array(X[['operational_setting_1', 'operational_setting_2', 'operational_setting_3']])
+
+        if operational_readings.ndim == 1:
+            operational_readings = operational_readings.reshape(1,-1)
+
+        operational_conditions = kmeans.predict(operational_readings) + 1
     
         return operational_conditions
 
