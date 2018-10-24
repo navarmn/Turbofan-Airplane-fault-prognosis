@@ -27,6 +27,7 @@ class SelectSensors(BaseEstimator, TransformerMixin):
         return X.get(general_info + list(sensor_headers) + important_info)
 
 
+
 class RemoveInfo(BaseEstimator, TransformerMixin):
 
     def fit(self, X):
