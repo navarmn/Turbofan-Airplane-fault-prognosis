@@ -1,0 +1,26 @@
+### Configurations for printing high quality figures on sci-papers
+##
+#
+# Set figure size:
+
+figure.figsize      : 11.81, 7.84       # 30 x 20 cm
+
+# Set font type and size:
+
+font.family         : 'serif'
+font.serif	    : ['CMU-Serif']
+text.usetex         : True
+
+axes.titlesize      : 26
+axes.labelsize      : 24
+
+xtick.labelsize     : 20
+ytick.labelsize     : 20
+
+legend.fontsize     : 20
+
+# Set Line styles:
+
+lines.linewidth     : 2.5
+lines.markersize    : 10
+
